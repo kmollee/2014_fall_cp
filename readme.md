@@ -3,14 +3,15 @@
 
 # Making python files executable in Ubuntu
 
-```bash
+```sh
 chmod +x file.py
 ./file.py
 ```
 
 # windows python portable(dll) contain
 
+```sh
     msvcp100.dll
     msvcr100.dll
     python33.dll
-
+```
