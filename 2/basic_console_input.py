@@ -10,8 +10,17 @@ print("your name is", name)
 # then divide by 2
 # print out
 
+# it will be error, string can't use number operator
 number = input("Enter a number:")
-print("One half of", number, "=", numberr / 2)  # error!
+print("One half of", number, "=", number / 2)  # error!
 
+
+# string -> int
 number = int(input("Enter a number:"))
-print("One half of", number, "=", numberr / 2)
+print("One half of", number, "=", number / 2)
+
+
+# string -> float number
+number = float(input("Enter a number:"))
+print("One half of", number, "=", number / 2)
+
