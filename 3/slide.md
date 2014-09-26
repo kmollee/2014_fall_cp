@@ -31,11 +31,11 @@
 - Previous review
     + print
     + input
-
 - Variable
     + type
     + name rule
     + convert
+- Function
 
 ---
 
@@ -180,6 +180,12 @@ To convert value
     x < y
     y += 1
     a > 10 and a < 20
+
+---
+
+# function
+
+**in file 3/function_1.py**
 
 ---
 
