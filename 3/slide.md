@@ -75,6 +75,8 @@
     number = float(input("Enter a number:"))
     print("One half of", number, "=", number / 2)
 
+---
+
 # Zen of python
 
     !python
