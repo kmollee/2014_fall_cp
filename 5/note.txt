@@ -1,0 +1,136 @@
+introduce coursera
+
+why use shell? why use file?
+
+why indent so important?
+
+for loop
+
+    example find largest number in a set
+
+    largest_so_far = None
+    print("Before", largest_so_far)
+    for num in [9,51,4,15,35,41]:
+        if largest_so_far is None:
+            largest_so_far = num
+        elif num > largest_so_far:
+            largest_so_far = num
+        print("largest_so_far", largest_so_far)
+    print("After", largest_so_far)
+
+
+    example filter
+
+    print("Before")
+    for num in [9,41,12,3,74,15]:
+        if num > 20:
+            print("Large number", num)
+    print("After")
+
+    range(start, stop, step)
+
+    use iter to demonstrate how it works.
+
+    code
+
+    x = 5
+
+    for x in range(10):
+        print(x)
+
+    question... what happen after for loop, the x value still 5 or what else? why?
+
+while condition, break, continue
+
+    guess_lite
+
+    target = '15'
+    ans = None
+
+    while target != ans:
+        ans = input("Enter a number:")
+        if target == ans:
+            break
+        print("wrong number, try again")
+
+    print("you guess right number! Good job")
+
+
+function
+
+    ex: print, max, type
+
+    max function will return object
+
+    max take a arg, return maximum object
+
+    example should have 1, 2, 3 version
+
+    1. simple only print
+    2. simple but take arg and print
+    3. simple but take arg and print and return value
+
+    #0. how many line will print out?
+    x = 5
+    print("hello")
+
+    def say():
+        print("just say")
+
+    print("yo")
+    x = x + 2
+    print(x)
+
+
+    example1
+
+    # call the function
+
+    def say_hello():
+        print("Hi")
+        print("Have a good day!")
+
+    print("Yo!")
+    say_hello()
+
+    example2
+
+    def greet(lang):
+        if lang == 'ch':
+            print("你好")
+        elif lang == "en":
+            print("Hello")
+        elif lang == "fr":
+            print("Bonjour")
+        else:
+            print("@#$%^&*")
+    greet("ch")
+    greet("en")
+    greet("ph")
+
+    example3
+
+    def greet():
+        return "Hello"
+
+    print(greet(), "Sally")
+    print(greet(), "Glenn")
+
+    def greet(lang):
+        if lang == 'ch':
+            return "你好"
+        elif lang == "en":
+            return "Hello"
+        elif lang == "fr":
+            return "Bonjour"
+        else:
+            return "@#$%^&*"
+    print(greet("ch"), "Lin")
+    print(greet("en"), "Sally")
+    print(greet("fr"), "Glenn")
+
+    # real example, use triangle function
+
+    can call calculate many triangle and sum all area
+
+    # explain why function is so important, very reusable

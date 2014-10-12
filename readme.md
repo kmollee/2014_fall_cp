@@ -13,8 +13,11 @@ please report the problem at issue
 `git log` check out all git log
 
 `git log --stat` (more detail)
+
 `git log --graph`
+
 `git log --graph --oneline master branch-name`
+
 `git log -n 1` only show log 1 line
 
 `git status` check between staing area and working directory
@@ -50,6 +53,20 @@ may have some conflict, if automatic merge fail,git don't know, and would not gu
 it will let user to decide what to do, need to fix and commit to conclude the merge
 
 `git show <hash>` show commit and it's parent diff
+
+`git remote` show all remote name
+
+`git remote -v` show all remote name and url(more detail like fetch and push)
+
+`git remote add remote-name remote-url` add new remote
+
+`git push remote-name branch-name` push to remote with branch
+
+`git pull remote-name remote-branch-name` pull remote data to local
+
+`git fetch branch-name`
+
+`git pull master` = `git fech master` + `git merge master origin/master`
 
 ---
 
