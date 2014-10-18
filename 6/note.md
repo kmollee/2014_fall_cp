@@ -24,7 +24,7 @@ print("Line Count:", count)
 
 ---
 
-reading the **while** file
+reading the whole file
 
 ```py
 fhand = open("mbox-short.txt")
