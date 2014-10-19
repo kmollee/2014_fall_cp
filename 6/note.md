@@ -465,8 +465,231 @@ more specific
 - `(`        Indicates where string extraction is to start
 - `)`        Indicates where string extraction is to end
 
+# http
+
+[Internet protocol suite](http://en.wikipedia.org/wiki/Internet_protocol_suite)
+
+```
+http://www.fakedomain.com/page1.html
+```
+
+- `http://` protocol
+- `www.fakedomain.com` host
+- `page1.html` document
+
+```py
+>>> import socket
+>>> mysocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+>>> mysocket.connect(("www.py4inf.com", 80))
+```
+
+```py
+import socket
+mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+mysock.connect(('www.py4inf.com', 80))
+mysock.send('GET http://www.py4inf.com/code/remeo.txt HTTP/1.0\n\n')
+
+while True:
+    data = mysock.recv(512)
+    if len(data) < 1:
+        break
+    print(data)
+
+mysocket.close()
+```
+
+```py
+from urllib.request import urlopen
+html = urlopen("http://www.google.com/")
+print(html)
+```
+
+```py
+from urllib.request import urlopen
+
+fhand = urlopen("http://www.py4inf.com/code/remeo.txt")
+counts = dict()
+
+for line in fhand:
+    words = line.split()
+    for word in words:
+        counts[word] = counts.get(word, 0) + 1
+print(counts)
+```
+
 # def
 
 refer previous week
+
+## why use function
+
+- have to reload file every time want to use it
+- can't use smae variable names in other pieces of code
+
+```py
+if x > y:
+    z = x
+else:
+    z = y
+```
+
+## benefit
+
+- Use by simply calling name and providing input
+- Internal detials hidden from users(like black box)
+- Syntax
+```py
+def <function name>(<formal parameters>):
+    <function body>
+```
+- `def` is keyword
+- Name is any legal Python name
+- Within parenthesis are zero or more formal parameters(each is variable name to be used inside function body)
+
+
+simple example 
+```py
+def max(x, y):
+    if x > y:
+        return x
+    else:
+        return y
+```
+
+invoke
+
+```py
+z = max(3, 4)
+```
+
+When we call or invoke `max(3, 4)`, x is bound to 3, y is bound to 4, and then body expression(s) are evaluated.
+
+## Function returns
+
+- Body can consist of any number of legal Python expressions
+- Expressions are evaluated until
+    + Run out of expressions, in which case special value `None` is returned.
+    + Or until special keyword `return` is reached, in which case subsequent expression is evaluated and that value is returned as value of function call.
+
+
+## Summary of function call
+
+- Expressions for each parameter are evaluated, bound to formal parameter names of function
+- Control transfers to first expression in body of function
+- Body expressions executed until `return` keyword reached(returning value of next expression) or run out of expressions(returning `None`)
+- Invocation is bound to the returned value
+
+env variable
+
+```py
+x = 5
+y = 3
+
+def max(x, y):
+    if x > y:
+        return x
+    else:
+        return y
+
+z = max(3, 4)
+```
+
+example - compute powers of number
+
+origin
+
+```py
+x = float(input("Enter a number:"))
+p = int(input("Enter a interger power:"))
+
+result = 1
+
+for turn in range(p):
+    print("iteration: " + str(turn) + "current result: " + str(result))
+    result = result * x
+print("final result:" + str(result))
+```
+
+use def
+
+```py
+def iterativePower(x, p):
+    result = 1
+
+    for turn in range(p):
+        print("iteration: " + str(turn) + "current result: " + str(result))
+        result = result * x
+    return result
+x = 3
+y = 4
+z = iterativePower(3, 5)
+# x still is 3, y still is 4
+print(z)# 243
+```
+
+```tex
+f \left ( a, b, c, x  \right ) = a \cdot x^2 + b \cdot x + c
+```
+
+```py
+def f(a, b, c, x):
+    return a*x*x + b*x + c
+```
+
+
+Each function all creates a new environment which scopes bindings of formal parameter and value, and of local variavles(those created with assignments within body)
+
+more example
+
+```py
+def square(x):
+    return x * x
+
+def twoPower(x, n):
+    while n > 1:
+        x = square(x)
+        n = n / 2
+    return x
+
+x = 5
+n = 1
+print(twoPower(2, 8))
+```
+
+nest
+
+```py
+>>> x = 12
+>>> def g(x):
+      x = x + 1
+      def h(y):
+          return x + y
+      return h(6)
+>>> g(x)
+>>> 19
+```
+
+
+other/findRoot2.py
+
+```py
+def findRoot2(x, power, epsilon):
+    if x < 0 and power % 2 == 0:
+        return None
+    low = min(0, x)
+    high = max(0, x)
+    ans = (low + high) / 2.0
+    while abs(ans ** power - x) > epsilon:
+        if ans ** power < x:
+            low = ans
+        else:
+            high = ans
+        ans = (high + low) / 2.0
+    return ans
+print(findRoot2(25.0, 2, 0.01))
+print(findRoot2(20.0, 2, 0.01))
+print(findRoot2(16.0, 2, 0.01))
+print(findRoot2(0.25, 2, 0.01))
+```
 
 # combine def with for
