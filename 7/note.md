@@ -862,3 +862,64 @@ def divide(x, y):
     finally:
         print('executing finally clause')
 ```
+
+Exception as flow of control
+
+- In tranditional programming languages, one deals with errors by having functions return special values
+- Any other code invoking a function has to check whether `error value` was returned
+- In Python, can just raise an exception when unable to produce a result consistent with function's specification
+
+```py
+raise excetionName(arguments)
+```
+
+Example
+
+```py
+def getRatios(v1, v2):
+    """
+    assumes: v1 and v2 are lists of equal lenth of numbers
+    return L a list containing the meaningful values of v1[i]/v2[i]
+    """
+    ratios = []
+    for index in range(len(v1)):
+        try:
+            ratios.append(v1[index] / float(v2[index]))
+        except ZeroDivisionError:
+            ratios.append(float('NaN'))  # NaN = Not a number
+        except:
+            return ValueError('getRatios called with bad arg')
+    return ratios
+
+try:
+    print(getRatios([1.0, 2.0, 7.0, 6.0], [1.0, 2.0, 0.0, 3.0]))
+    print(getRatios([], []))
+    print(getRatios([1.0, 2.0], [3.0]))
+except ValueError as msg:
+    print(msg)
+```
+
+# `assert`
+
+example
+
+```py
+def avg(grades, weights):
+    assert not len(grades)==0, 'no grades data'
+    assert len(grades)==len(weights), 'wrong number grades'
+    newgr = [convertLetterGrade(elt) for elt in grades]
+    result = dotProduct(newgr, weight)/len(newgr)
+    assert 0.0 <= result <= 100.0
+    return result
+```
+
+## Where to use assertions
+
+- Goal is to spot bugs early, and make clear where they happened
+    + Easier to debug when catch at first point of contact, instead of trying to trace down later
+- Not to be used in place of testing, but as a supplement to testing
+- Should probably rely on raising exceptions if user supplies bad data input, and use assertions for:
+    + Checking types of arguments or values
+    + Checking that invariants on data structure are met
+    + Checking constrains on return values
+    + Checking for violations of constrains on procedure(e.g. no duplicates in a list)
