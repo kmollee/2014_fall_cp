@@ -1,0 +1,71 @@
+# ====== v1 ======
+穿衣服
+    blablabla
+穿褲子
+    blablabla
+穿襪子
+    blablabla
+穿鞋子
+    blablabla
+
+
+出門前三十分鐘要做的事：
+    穿衣服
+    穿褲子
+    穿襪子
+    穿鞋子
+
+# ====== v2 ======
+
+穿衣服
+    blablabla
+穿褲子
+    blablabla
+穿襪子
+    blablabla
+穿左腳襪子
+    blablabla
+穿右腳襪子
+    blablabla
+穿鞋子
+    blablabla
+穿左腳鞋子
+    blablabla
+穿右腳鞋子
+    blablabla
+
+
+
+出門前三十分鐘要做的事：
+    穿衣服
+    穿褲子
+    穿左腳襪子
+    穿右腳襪子
+    穿左腳鞋子
+    穿右腳鞋子
+
+# ====== v3 ======
+
+穿衣服
+    blablabla
+穿褲子
+    blablabla
+穿襪子（腳）
+    抬起你說的那一支腳
+    blablabla
+穿鞋子（腳）
+    抬起你說的那一支腳
+    blablabla
+
+
+出門前三十分鐘要做的事：
+    穿衣服
+    穿褲子
+    穿襪子（左腳）
+    穿襪子（右腳）
+    穿鞋子（左腳）
+    穿鞋子（右腳）
+
+
+要出門前三十分鐘左右執行
+    執行 出門前三十分鐘要做的事
