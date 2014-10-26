@@ -540,3 +540,289 @@ def search(L, e):
 - This address can be found in constant time, and value stored at address also found in constant time
 - So search is linear
 - **Indirection:** accessing something by first accessing something else that contains a reference to thing sought
+
+## Binary search
+
+- Can we do better than `O(len(L))` for search?
+- If know nothing about values of elements in list, then no.
+- Worst case, would have to look at every element
+
+## What if list is ordered?
+
+- Suppose elements are sorted in ascending order
+
+```py
+def search(L, e):
+    for i in range(len(L)):
+        if L[i] == e:
+            return True
+        if L[i] > e:
+            return False
+    return False
+```
+
+- Improves average complexity, but worst case still need to look at every element
+
+## Use binary search
+
+1. Pick an index, `i`, that divides list in half
+2. Ask if `L[i]==e`
+3. If not, ask if `L[i]` larger or smaller than `e`
+4. Depending on answer, search left or right half of `L` for `e`
+
+A new version of a divide-and-conquer algorithm
+
+- Break into smaller version of problem(smaller list), plus some simple operations.
+
+```py
+def search(L, e):
+    def bSearch(L, e, low, high):
+        if high == low:
+            return L[low]
+        mid = low + int((high - low) / 2)
+        if L[mid] == e:
+            return True
+        if L[mid] > e:
+            return bSearch(L, e, low, mid - 1)
+        else:
+            return bSearch(L, e, mid + 1, high)
+    if len(L) == 0:
+        return False
+    else:
+        return bSearch(L, e, 0, len(L) - 1)
+```
+
+## Analyzing binary search
+
+- Does tha recursion halt?
+    + Decrementing function
+        1. Maps values to which formal parameters are bound to no-negative interger
+        2. When value is `<= 0`, recursion terminates
+        3. For each recursive call, value of fucntion is strictly less than value on entry to instance of function
+    + Here function is high-low(range)
+        * At least `0` first time called `(1)``
+        * When exactly `0`, no recursive call, return `(2)`
+        * Otherwise, halt or recursively call with value halved `(3)`
+- So terminates
+- What is complexity?
+    + How many recursive calls?(work within each call is constant)
+    + How many times can we divide `high - low` in half before reaches `0`?
+    + `log (high - low) base on 2`
+    + thus search complexity is `O(log(len(n)))`
+
+## EASIER TO READ SEARCH PROCEDURE
+
+One of the nice things about coding is that there are many ways of writing a program to do the same thing. Not only that, there are many reasons to write code. The point of presenting code in the text, slides, and lectures to precisely explain a computer science concept. Code is more precise than a lengthy wordy description. In the first few lectures, the goal is to show how to write code in Python. Now, the goal is to discuss algorithms and their complexity. When we want to discuss the running time of an algorithm, it is important to account for all the overheads. This can be difficult when programming languages provide very concise notation for complex operations. For example, in Python, newList = oldList[:] is one simple line, but it makes a copy of the whole list. If the list is long, then the copy can take a long time (O(n) in fact). On the other hand, it is much easier to read than a "for loop" that makes the overhead of the copying obvious.
+
+The lecture on searching is concerned with the running time of various searching algorithm -- how long does it take to find an item in an ordered list. It is important to ensure that there is not any hidden overhead such as list copying. This is why the code in the lectures use indices.
+
+This short memo points out the Python way of describing the search algorithm in a way that is clear to understand, but may have some hidden overhead. When we are not concerned with the complexity or counting the operations, then clarity and readability is more important. It is up to you to know when to use each.
+
+An iterative "Pythonic" search procedure:
+
+```py
+def search(list, element):
+    for e in list:
+        if e == element: 
+            return True
+    return False
+```
+
+The recursive way:
+
+```py
+def rSearch(list,element):
+    if element == list[0]:
+        return True
+    if len(list) == 1:
+        return False
+    return rSearch(list[1:],element)
+```
+
+A recursive "Pythonic" binary search procedure:
+
+```py
+def rBinarySearch(list,element):
+    if len(list) == 1:
+        return element == list[0]
+    mid = len(list)/2
+    if list[mid] > element:
+        return rBinarySearch( list[ : mid] , element )
+    if list[mid] < element:
+        return rBinarySearch( list[mid : ] , element)
+    return True
+```
+
+## Sorting algorithms
+
+- So what about cost of sorting?
+- Assume complexity of sorting alist is `O(osrt(L))`
+- Then if we sort and search we want to know if `(sort(L) + log (len(L)) < len(L)`
+    + i.e. should we sort and search using binary, just use linear search
+- Can't sort in less than linear time!
+
+## Amortizing costs
+
+- But suppose we want to search a list k times?
+- Then is `(sort(L) + k*log(len(L)) < k*len(L)`?
+    + Depends on k, but one expects that if sort can be done efficiently, then it is better to sort first
+    + Amortizing cost of sorting over multiple searches may make this worthwhile
+    + How efficiently can we sort?
+
+### Example
+
+```py
+def selSort(L):
+    for i in range(len(L) - 1):
+        minIdex = i
+        minVal = L[i]
+        j = i + 1
+        while j < len(L):
+            if minVal > L[j]:
+                minIdex = j
+                minVal = L[j]
+            j += 1
+        L[i], L[minIdex] = L[minIdex], L[i]
+```
+
+## Analyzing slection sort
+
+- Loop invariant
+    + Given prefix of list `L[0:i]` and suffix `L[i+1:len(L)-1]`, then prefix is sorted and no elment is prefix is larger than smallest element in suffix
+    1. Base case: prefix empty, suffix whole list - invariant true
+    2. induction step: move minimum element from suffix to end of prefix. Since invariant true before move, prefix sorted after append
+    3. When exit, prefix is entire list, suffix empty, so sorted
+- Complexity of inner loop is `O(len(L))`
+- Complexity of outer loop alos `O(len(L))`
+- So overall complexity is `O(len(L)^2)` or quadratic
+- Expensive
+
+## L10 PROBLEM 5
+
+```py
+def selSort(L):
+    for i in range(len(L) - 1):
+        minIndx = i
+        minVal = L[i]
+        j = i+1
+        while j < len(L):
+            if minVal > L[j]:
+                minIndx = j
+                minVal = L[j]
+            j += 1
+        if minIndx != i:
+            temp = L[i]
+            L[i] = L[minIndx]
+            L[minIndx] = temp
+```
+
+And here is a suggested alternative:
+
+```py
+def newSort(L):
+    for i in range(len(L) - 1):
+        j=i+1
+        while j < len(L):
+            if L[i] > L[j]:
+                temp = L[i]
+                L[i] = L[j]
+                L[j] = temp
+            j += 1
+```
+
+1. two function result in the same sorted list.
+2. `newSort` may use more - but never fewer - inserts than `selSort`.
+3. `newSort` and `selSort` have the same complexity.
+
+## Merge sort
+
+- Use a divide-and-conquer approach:
+    1. If list is length 0 or 1, already sorted
+    2. If list has more than one element, split into two lists, and sort each
+    3. Merge results
+        1. To merge, just look at first element of each, move smaller to end of the result
+        2. When one list empty, just copy rest of other list
+
+## Complexity of merge sort
+
+- Comparison and copying are constant
+- Number of comparisons - `O(len(L))`
+- Number of copyings - `O(len(L1)+len(L2))`
+- So merging is linear in lenth of the list
+- Merge is `O(len(L))`
+- Mergesort is `O(len(L))` times number of call merge
+    + `O(len(L))` times number of call to mergesort
+    + `O(len(L)*log(len(L)))`
+- Log linear - `O(n log n)`, where `n` is `len(L)`
+- Does come with cost in space, as make new copy of list
+
+```py
+import operator
+
+
+def merge(left, right, compare):
+    """
+    left:list object
+    right:list object
+    compare:operator object
+    compare left and right list each time once get each one element make compare
+    return list
+    """
+    result = []
+    i, j = 0, 0
+    while (i < len(left)) and (j < len(right)):
+        if compare(left[i], right[j]):
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    while (i < len(left)):
+        result.append(left[i])
+        i += 1
+    while (j < len(right)):
+        result.append(right[j])
+        j += 1
+    return result
+
+
+def mergeSort(L, compare=operator.lt):
+    """
+    L:list object
+    compare:operator object
+    default compare:less than
+    return list(already sort)
+    """
+    if len(L) < 2:
+        return L[:]
+    else:
+        middle = int(len(L) / 2)
+        left = mergeSort(L[:middle], compare)
+        right = mergeSort(L[middle:], compare)
+        return merge(left, right, compare)
+```
+
+## Imporving efficiency
+
+- Combining binary search with merge sort very efficient
+    + If we search list k times, then efficiency is `n*log(n) + k*log(n)`
+- Can we do better?
+- Dictionaries use concpet of hashing
+    + Lookup can be done in time almost independent of size of dictionary
+
+## Hashing
+
+- Convert key to an int
+- Use int to index into a list (constant time)
+- Conversion done using a **hash function**
+    + Map large space of inputs to smaller space of outputs
+    + Thus a manay-to-one mapping
+    + When tow inputs go to same output - a **collision**
+    + A good hash function has a uniform distribution-minimizes probability of a collision
+
+## Complexity
+
+- If no collisions, then `O(1)`
+- If everything hashed to same bucket, then `O(n)`
+- But in general, can trade off space to make hash table large, and with good function get close to uniform distribution, and reduce complexity to close to `O(1)`
+
