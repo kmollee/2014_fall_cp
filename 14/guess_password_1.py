@@ -9,7 +9,7 @@ gusssNumber = input("enter password")
 # 密碼
 secretNumber = '123'
 
-if guessNumber == serectNumber:
+if guessNumber == secretNumber:
     print('you pass it')
 else:
     print('try again')
