@@ -1,15 +1,16 @@
 #@+leo-ver=5-thin
-#@+node:lee.20141207235250.46: * @file guess_password_2.py
+#@+node:lee.20141207235250.56: * @file guess_password_3.py
 #@@language python
 #@@tabwidth -4
 
 #@+<<decorations>>
-#@+node:lee.20141207235250.48: ** <<decorations>>
+#@+node:lee.20141207235250.57: ** <<decorations>>
 import cherrypy
+import os
 #@-<<decorations>>
 
 #@+<<secretNumber>>
-#@+node:lee.20141207235250.49: ** <<secretNumber>>
+#@+node:lee.20141207235250.58: ** <<secretNumber>>
 secretNumber = '123'
 #@-<<secretNumber>>
 
@@ -38,7 +39,12 @@ class Guess(object):
         else:
             return "try it again"
     #@-others
-#@+node:lee.20141207235250.63: ** run
-cherrypy.quickstart(Guess())
+#@+node:lee.20141207235250.54: ** run eviron
+if 'OPENSHIFT_REPO_DIR' in os.environ.keys():
+    # 在 openshift
+    application = cherrypy.Application(Guess())
+else:
+    # 在其他環境下執行
+    cherrypy.quickstart(Guess())
 #@-others
 #@-leo
