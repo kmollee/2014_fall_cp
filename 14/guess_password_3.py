@@ -34,7 +34,7 @@ class Guess(object):
     #@+node:lee.20141207235250.53: *3* def check
     @cherrypy.expose
     def check(self, password):
-        if password == serectNumber:
+        if password == secretNumber:
             return "you pass it"
         else:
             return "try it again"
