@@ -10,6 +10,10 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
+<v t="lee.20141212200847.2" a="E"><vh>@settings</vh>
+<v t="lee.20141212200847.3"><vh>@data qt-gui-plugin-style-sheet</vh></v>
+<v t="lee.20141212200847.4"><vh>@string initial_split_orientation = horizontal</vh></v>
+</v>
 <v t="lee.20141207235250.40"><vh>Computer Programming Section</vh></v>
 <v t="lee.20141207235250.47" a="E"><vh>@path 14</vh>
 <v t="lee.20141207235250.41" a="E"><vh>week 14</vh>
@@ -25,6 +29,12 @@
 </v>
 </v>
 </v>
+<v t="lee.20141212200847.9" a="E"><vh>@path 15</vh>
+<v t="lee.20141212200847.11"><vh>note</vh></v>
+<v t="lee.20141212201841.7"><vh>@file symbol.py</vh></v>
+<v t="lee.20141212200847.12" a="E"
+expanded="lee.20141212201841.4,"><vh>@file application.py</vh></v>
+</v>
 </vnodes>
 <tnodes>
 <t tx="lee.20141207235250.40"></t>
@@ -36,5 +46,105 @@
 <t tx="lee.20141207235250.45">遷移到 cherrypy</t>
 <t tx="lee.20141207235250.47"></t>
 <t tx="lee.20141207235250.55">與 openshift 同步</t>
+<t tx="lee.20141212200847.11">this is final project note
+
+using cherrypy
+
+need create tmp folder, to store session</t>
+<t tx="lee.20141212200847.2"></t>
+<t tx="lee.20141212200847.3">QSplitter::handle {
+    background-color: #CAE1FF; /* lightSteelBlue1 */
+}
+
+QStackedWidget {
+    /* background-color:lightpink; */
+    border-color: red;
+    padding: 0px;
+    /* border-width: 0px; */
+    /* background-color: yellow; */
+}
+
+QSplitter {
+    border-color: white;
+    background-color: white;
+    border-style: solid;
+}
+
+QTreeWidget {
+    /* These apply to the selected item, but not to editing items.*/
+    background-color: #ffffec; /* Leo's traditional tree color */
+    selection-color: black; /* was white */
+    selection-background-color: lightgrey;
+    /* font-family: SansSerif; */
+    /*font-family: DejaVu Sans Mono;*/
+    font-family:YaHei Mono;
+    /* 標題字型大小設定 */
+    font-size: 18px;
+    font-weight: normal; /* normal,bold,100,..,900 */
+    font-style: normal; /* normal, italic,oblique */
+ }
+
+/* Headline edit widgets */
+QTreeWidget QLineEdit {
+    background-color: cornsilk;
+    selection-color: white;
+    selection-background-color: blue;
+    /*font-family: DejaVu Sans Mono;*/    
+    font-family:YaHei Mono;
+    /* 沒有特別對應字型大小 */
+    font-size: 17px;
+    font-weight: normal; /* normal,bold,100,..,900 */
+    font-style: normal; /* normal, italic,oblique */
+}
+
+/* The log panes */
+QTextEdit {
+    background-color: #f2fdff;
+    selection-color: red;
+    selection-background-color: blue;
+    /* font-family: Courier New; */
+    font-family:YaHei Mono;
+    /* log font 大小 */
+    font-size: 17px;
+    font-weight: normal; /* normal,bold,100,..,900 */
+    font-style: normal; /* normal, italic,oblique */
+}
+
+/* The body pane */
+QTextEdit#richTextEdit {
+    background-color: #fdf5f5; /* A kind of pink. */
+    selection-color: white;
+    selection-background-color: red;
+    /*font-family: DejaVu Sans Mono;*/
+    /* font-family: Courier New; */
+    font-family:YaHei Mono;
+    /* 內文字型大小 */
+    font-size: 18px;
+    font-weight: normal; /* normal,bold,100,..,900 */
+    font-style: normal; /* normal,italic,oblique */
+}
+
+QLabel {
+    font-family:YaHei Mono;
+    /* 下方的 Minibuffer 標題字型大小 */
+    font-size: 17px;
+    font-weight: normal; /* normal,bold,100,..,900 */
+    font-style: normal; /* normal,italic,oblique */
+}
+
+/* Editor labels */
+QLineEdit#editorLabel {
+    background-color: #ffffec;
+    font-family:YaHei Mono;
+    /* 沒有直接對應字型大小 */
+    font-size: 17px;
+    font-weight: normal; /* normal,bold,100,..,900 */
+    font-style: normal; /* normal,italic,oblique */
+    border: 2px;
+    margin: 2px;
+}</t>
+<t tx="lee.20141212200847.4">horizontal: body pane to the left
+vertical: body pane on the botton</t>
+<t tx="lee.20141212200847.9"></t>
 </tnodes>
 </leo_file>
