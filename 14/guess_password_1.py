@@ -4,7 +4,7 @@
 #@@tabwidth -4
 
 # 輸入通關密語
-gusssNumber = input("enter password")
+guessNumber = input("enter password:")
 
 # 密碼
 secretNumber = '123'
