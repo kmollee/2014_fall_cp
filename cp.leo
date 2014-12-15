@@ -30,6 +30,7 @@
 </v>
 </v>
 <v t="lee.20141212200847.9" a="E"><vh>@path 15</vh>
+<v t="lee.20141215164031.41"><vh>@file __init__.py</vh></v>
 <v t="lee.20141212200847.11"><vh>note</vh></v>
 <v t="lee.20141212201841.7"><vh>@file symbol.py</vh></v>
 <v t="lee.20141212200847.12" a="E"

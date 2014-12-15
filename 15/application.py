@@ -12,6 +12,24 @@ import random
 #@-<<decorations>>
 
 #@+others
+#@+node:lee.20141215164031.40: ** folder setting
+_curdir = os.path.join(os.getcwd(), os.path.dirname(__file__))
+
+if 'OPENSHIFT_REPO_DIR' in os.environ.keys():
+    # 表示程式在雲端執行
+    data_dir = os.environ['OPENSHIFT_DATA_DIR']
+    tmp_dir = data_dir + 'tmp'
+else:
+    # 表示程式在近端執行
+    data_dir = _curdir + "/local_data/"
+
+tmp_dir = data_dir + 'tmp'
+
+if not os.path.exists(data_dir):
+    os.makedirs(data_dir)
+
+if not os.path.exists(tmp_dir):
+    os.makedirs(tmp_dir)
 #@+node:lee.20141212201841.9: ** template
 template = """
 <html lang="en">
@@ -128,7 +146,7 @@ class Final(object):
         'tools.sessions.on' : True,
         'tools.sessions.storage_type' : 'file',
         'tools.sessions.locking' : 'early',
-        'tools.sessions.storage_path' : './tmp',
+        'tools.sessions.storage_path' : tmp_dir,
         
         'tools.sessions.timeout' : 60,
     }
@@ -332,7 +350,7 @@ class Final(object):
                 del cherrypy.session["count"]
                 del cherrypy.session["answer"]
                 # throw successful
-                return self.use_template("<h1>" + message["successful"] + "</h1><p>refresh to restart game</p>")
+                return self.use_template("<h1>" + message["successful"] + '</h1><a href="/guessForm">play again</a>')
             elif guessNumber > answer:
                 # throw small than guessNumber
                 return self.use_template("<h1>" + message["smaller"] + "</h1>" + form)
