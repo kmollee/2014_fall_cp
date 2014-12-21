@@ -1,5 +1,5 @@
 #@+leo-ver=5-thin
-#@+node:lee.20141215164031.94: * @file a40323100.py
+#@+node:lee.20141215164031.94: * @file a40323198.py
 #@@language python
 #@@tabwidth -4
 #@+<<decorations>>
@@ -7,20 +7,28 @@
 import cherrypy
 import random
 from std.asciisymbol import asciiImage
-from application import env
+from wsgi import env
 #@-<<decorations>>
 
 #@+others
 #@+node:lee.20141215164031.96: ** class Application
 class Application(object):
     #@+others
+    #@+node:lee.20141221203113.62: *3* def __init__
+    def __init__(self):
+        self.name = 'Just Example'
+        self.number = '40323198'
+        self.classes = 'nfu'
+        self.github_repo_url = 'https://github.com/mdeta/2014cp'
+        self.evaluation = [('Project 7', 80), ('Project 8', 90), ('Project 9', 100)]
+        self.photo_url = 'http://placekitten.com/g/350/300'
     #@+node:lee.20141215164031.97: *3* def get_nav
     def get_nav(self):
         """
         取得 nav link
         """
         #(URL 路徑, anchor name)
-        anchors = [('index', 'home'), ('guessForm', '猜數字'), ('multipliedTable', '乘法表'), ('asciiForm', '使用圖案印出字'), ('https://github.com/mdeta/2014cp', 'github repository'), ('/', 'back to list')]
+        anchors = [('index', 'home'), ('guessForm', '猜數字'), ('multipliedTable', '乘法表'), ('asciiForm', '使用圖案印出字'), (self.github_repo_url, 'github repository'), ('/', 'back to list')]
         return anchors
     #@+node:lee.20141215164031.98: *3* def index
     @cherrypy.expose
@@ -32,13 +40,13 @@ class Application(object):
         tmpl = env.get_template('personal_page.html')
         # 設定額外變數
         extra_content = {
-            'title':'personal page',
-            'photo_url':'http://placekitten.com/g/350/300',
-            'name':'Lee',
-            'ID':'123456789',
-            'class':'nfu',
+            'title': 'personal page -' + self.name,
+            'photo_url': self.photo_url,
+            'name': self.name,
+            'ID':self.number,
+            'class':self.classes,
             'anchors':self.get_nav(),
-            'self_evaluations':[('Porject7', 80), ('Porject8', 90), ('Porject9', 100)]
+            'self_evaluations':self.evaluation
         }
         # 宣染
         return tmpl.render(extra_content)

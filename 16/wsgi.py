@@ -1,5 +1,5 @@
 #@+leo-ver=5-thin
-#@+node:lee.20141215164031.46: * @file application.py
+#@+node:lee.20141215164031.46: * @file wsgi.py
 #@@language python
 #@@tabwidth -4
 
@@ -38,6 +38,8 @@ if not os.path.exists(data_dir):
 
 if not os.path.exists(tmp_dir):
     os.makedirs(tmp_dir)
+#@+node:lee.20141221203113.57: ** student list
+std_list = ["403231{0:02d}".format(s) for s in range(1, 58)] + ['40323198', '40323199',]
 #@+node:lee.20141215164031.50: ** class Final
 class Final(object):
     #@+others
@@ -58,7 +60,6 @@ class Final(object):
         tmpl = env.get_template('index.html')
         # student list 40323101 - 40323157
         # use 40323100 to demonstrate example
-        std_list = ["403231{0:02d}".format(s) for s in range(0, 58)]
         return tmpl.render(title='index', students=std_list)
     #@-others
 #@+node:lee.20141215164031.86: ** def error_page_404
@@ -78,11 +79,10 @@ import imp
 # e.g. 127.0.0.1/40323100/
 # if visitor visit not exsit page, raise 404
 # 40323100 - 57, 40323100 is an example page.
-for i in range(0, 58):
+for i in std_list:
     try:
-        mod = imp.load_source(
-            'a403231%02d' % i, std_dir + 'a403231%02d.py' % i)
-        setattr(root, '403231%02d' % i, mod.Application())
+        mod = imp.load_source(i, std_dir + 'a%s.py' % i)
+        setattr(root, i, mod.Application())
     except:
         pass
 #@+node:lee.20141221203113.44: ** application_conf
