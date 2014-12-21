@@ -39,7 +39,8 @@ if not os.path.exists(data_dir):
 if not os.path.exists(tmp_dir):
     os.makedirs(tmp_dir)
 #@+node:lee.20141221203113.57: ** student list
-std_list = ["403231{0:02d}".format(s) for s in range(1, 58)] + ['40323198', '40323199',]
+std_list = [["403231{0:02d}".format(s), "active"] for s in range(1, 58)] + [('40323198', 'active'), ('40323199','active')]
+print(std_list)
 #@+node:lee.20141215164031.50: ** class Final
 class Final(object):
     #@+others
@@ -60,6 +61,7 @@ class Final(object):
         tmpl = env.get_template('index.html')
         # student list 40323101 - 40323157
         # use 40323100 to demonstrate example
+        print(std_list)
         return tmpl.render(title='index', students=std_list)
     #@-others
 #@+node:lee.20141215164031.86: ** def error_page_404
@@ -79,12 +81,12 @@ import imp
 # e.g. 127.0.0.1/40323100/
 # if visitor visit not exsit page, raise 404
 # 40323100 - 57, 40323100 is an example page.
-for i in std_list:
+for n, (std, status) in enumerate(std_list):
     try:
-        mod = imp.load_source(i, std_dir + 'a%s.py' % i)
-        setattr(root, i, mod.Application())
+        mod = imp.load_source(std, std_dir + 'a%s.py' % std)
+        setattr(root, std, mod.Application())
     except:
-        pass
+        std_list[n][1] = 'inactive'
 #@+node:lee.20141221203113.44: ** application_conf
 # set up app conf
 application_conf = {

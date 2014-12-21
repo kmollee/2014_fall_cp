@@ -220,6 +220,10 @@ footer {
     margin-left: 5%;
 }
 
+.wall .inactive{
+    background-color: #9D91A3;
+}
+
 .std { /* Masonry bricks or child elements */
     background-color: #ECB0E1;
     display: inline-block;
