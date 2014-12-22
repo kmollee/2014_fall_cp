@@ -42,14 +42,15 @@ class Application(object):
         extra_content = {
             'title': 'personal page -' + self.name,
             'photo_url': self.photo_url,
-            'name': self.name,
+            'std_name': self.name,
             'ID':self.number,
-            'class':self.classes,
+            # class 在 mako 底下是關鍵字
+            'classes':self.classes,
             'anchors':self.get_nav(),
             'self_evaluations':self.evaluation
         }
         # 宣染
-        return tmpl.render(extra_content)
+        return tmpl.render(**extra_content)
 
     #@+node:lee.20141215164031.99: *3* def guessForm
     @cherrypy.expose
@@ -96,7 +97,7 @@ class Application(object):
         #假如 guessNumber is None, 表示是第一次進來, 或是未傳值
         if guessNumber is None:
             extra_content['output'] = message['welcome']
-            return tmpl.render(extra_content)
+            return tmpl.render(**extra_content)
         # 其他, 表示要開始處理 guessNumber
         else:
             # convert guessNumber to int
@@ -106,7 +107,7 @@ class Application(object):
                 # if fail
                 # throw error
                 extra_content['output'] = message['error']
-                return tmpl.render(extra_content)
+                return tmpl.render(**extra_content)
 
             # convert ok, make count plus one, everytime
             cherrypy.session["count"] += 1
@@ -124,7 +125,7 @@ class Application(object):
             else:
                 # throw bigger than guessNumber
                 extra_content['output'] = message["bigger"]
-            return tmpl.render(extra_content)
+            return tmpl.render(**extra_content)
     #@+node:lee.20141215164031.100: *3* def multipliedTable
     @cherrypy.expose
     def multipliedTable(self, first=None, second=None):
@@ -156,7 +157,7 @@ class Application(object):
         # set output to welcome
         if first is None and second is None:
             extra_content['output'] = message.get('welcome')
-            return tmpl.render(extra_content)
+            return tmpl.render(**extra_content)
         # try convert to integer
         try:
             first = int(first)
@@ -173,7 +174,7 @@ class Application(object):
         # update extra content
         extra_content['output'] = '<p>' + output + '</p>'
         # render
-        return tmpl.render(extra_content)
+        return tmpl.render(**extra_content)
     #@+node:lee.20141215164031.101: *3* def asciiForm
     @cherrypy.expose
     def asciiForm(self, text=None):
@@ -207,7 +208,7 @@ class Application(object):
             # one arg, input type string
             extra_content['output'] = asciiImage(text)
         # render
-        return tmpl.render(extra_content)
+        return tmpl.render(**extra_content)
     #@-others
 #@-others
 #@-leo
