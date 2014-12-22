@@ -38,8 +38,19 @@ if not os.path.exists(data_dir):
 
 if not os.path.exists(tmp_dir):
     os.makedirs(tmp_dir)
-#@+node:lee.20141221203113.57: ** student list
-std_list = [["403231{0:02d}".format(s), "active"] for s in range(1, 58)] + [('40323198', 'active'), ('40323199','active')]
+#@+node:lee.20141221203113.57: ** student setting
+std_class = 'a'
+std_list = None
+ta_mode = True
+ta_list = None
+
+if std_class == 'a':
+    std_list = [["403231{0:02d}".format(s), "active"] for s in range(1, 58)]
+else:
+    std_list = [['40031226', 'active'], ['40223216', 'active']] + [["403232{0:02d}".format(s), "active"] for s in range(1, 57)]
+
+if ta_mode:
+    ta_list = [('example', 'active'), ('example1','active')]
 #@+node:lee.20141215164031.50: ** class Final
 class Final(object):
     #@+others
@@ -60,7 +71,11 @@ class Final(object):
         tmpl = env.get_template('index.html')
         # student list 40323101 - 40323157
         # use 40323100 to demonstrate example
-        return tmpl.render(title='index', students=std_list)
+        if ta_mode:
+            content_list = std_list + ta_list
+        else:
+            content_list = std_list
+        return tmpl.render(title='index', students=content_list)
     #@-others
 #@+node:lee.20141215164031.86: ** def error_page_404
 # handle page 404
@@ -81,10 +96,19 @@ import imp
 # 40323100 - 57, 40323100 is an example page.
 for n, (std, status) in enumerate(std_list):
     try:
-        mod = imp.load_source(std, std_dir + 'a%s.py' % std)
+        mod = imp.load_source(std, std_dir + std_class + '%s.py' % std)
         setattr(root, std, mod.Application())
     except:
         std_list[n][1] = 'inactive'
+
+# import ta module
+if ta_mode:
+    for n, (std, status) in enumerate(ta_list):
+        try:
+            mod = imp.load_source(std, std_dir + '%s.py' % std)
+            setattr(root, std, mod.Application())
+        except:
+            ta_list[n][1] = 'inactive'
 #@+node:lee.20141221203113.44: ** application_conf
 # set up app conf
 application_conf = {

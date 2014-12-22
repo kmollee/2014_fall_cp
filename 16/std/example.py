@@ -1,5 +1,5 @@
 #@+leo-ver=5-thin
-#@+node:lee.20141215164031.94: * @file a40323198.py
+#@+node:lee.20141215164031.94: * @file example.py
 #@@language python
 #@@tabwidth -4
 #@+<<decorations>>
