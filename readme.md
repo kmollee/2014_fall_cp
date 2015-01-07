@@ -4,6 +4,12 @@
 
 please report the problem at issue
 
+注意!請勿留下個人敏感資訊在其中, issues 中的內容是公開的, 請各位同學自行注意
+
+# deadline datetime
+
+11:59 P.M.(GMT+8) January 12, 2015
+
 # git - version control tool
 
 [git cheat sheet](http://www.git-tower.com/blog/assets/2013-05-22-git-cheat-sheet/cheat-sheet-large01.png)
